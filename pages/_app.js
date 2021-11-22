@@ -1,7 +1,25 @@
-import '../styles/globals.css'
+import { Provider } from "next-auth/client";
+import { QueryClient, QueryClientProvider } from "react-query";
 
-function MyApp({ Component, pageProps }) {
-  return <Component {...pageProps} />
+import "../styles/globals.css";
+
+const queryClient = new QueryClient({
+  defaultOptions: {
+    queries: {
+      refetchOnWindowFocus: false,
+    },
+  },
+});
+
+export default function App({
+  Component,
+  pageProps,
+}) {
+  return (
+    <Provider session={pageProps.session}>
+      <QueryClientProvider client={queryClient}>
+        <Component {...pageProps} />
+      </QueryClientProvider>
+    </Provider>
+  );
 }
-
-export default MyApp

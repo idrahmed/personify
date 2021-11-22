@@ -1,0 +1,89 @@
+.container {
+  display: flex;
+  flex-direction: column;
+  gap: 30px;
+  width: 100%;
+  padding: 80px 0 40px 0;
+  padding-right: 40px;
+}
+
+.heading {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.heading_left {
+  display: flex;
+  align-items: center;
+}
+
+.heading_left h1 {
+  color: white;
+  margin-right: 3rem;
+}
+
+.button {
+  border-radius: 50px;
+  width: 10rem;
+  height: 2.8rem;
+  background-color: #1e8fffd8;
+  color: white;
+  border: 1px solid black;
+  font-size: 0.9rem;
+  cursor: pointer;
+}
+
+.button:hover {
+  background-color: #1e90ff;
+  transition: ease-in 150ms;
+}
+
+.tracks {
+  display: flex;
+  flex-direction: column;
+  gap: 12.5px;
+  counter-reset: section;
+  list-style-type: none;
+}
+
+.select {
+  width: 200px;
+}
+
+@media screen and (max-width: 980px) {
+  .container {
+    padding: 0;
+  }
+  .heading {
+    display: flex;
+    flex-direction: column;
+    gap: 25px;
+    align-items: stretch;
+  }
+  .heading_left {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-right: 2rem;
+  }
+  .select {
+    width: 100%;
+  }
+  .heading_left h1 {
+    font-size: 1.5rem;
+  }
+  .button {
+    font: 1rem;
+    width: 9rem;
+  }
+  .container {
+    padding-right: 30px;
+  }
+}
+
+@media screen and (max-width: 768px) {
+  .container {
+    padding-right: 0px;
+  }
+}

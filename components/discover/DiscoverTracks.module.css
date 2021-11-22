@@ -1,0 +1,54 @@
+.container {
+  display: flex;
+  flex-direction: column;
+}
+
+.track:hover {
+  transform: scale(1.1);
+  transition: ease-in 250ms;
+}
+
+.img_container {
+  position: relative;
+  width: 220px;
+  height: 240px;
+}
+
+.track_titles {
+  display: block;
+  font-size: 14px;
+  padding-top: 15px;
+  width: 220px;
+ 
+}
+
+.track_titles h3 {
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.track {
+  border-radius: 18px;
+}
+
+@media screen and (max-width: 900px) {
+  .img_container {
+    position: relative;
+    width: 180px;
+    height: 200px;
+  }
+  .track_titles {
+    width: 180px;
+  }
+}
+
+@media screen and (max-width: 800px) {
+  .img_container {
+    width: 140px;
+    height: 160px;
+  }
+  .track_titles {
+    width: 140px;
+  }
+}
