@@ -48,25 +48,19 @@ const responsive = {
   }
 };
 
-const Discover = () => {
-  const { status, error, data } = useQuery(["discover"], async () => {
-    const { data } = await axios.get("/api/discover");
-    return data;
-  });
+const Discover = ({items}) => {
+  // const { status, error, data } = useQuery(["discover"], async () => {
+  //   const { data } = await axios.get("/api/discover");
+  //   return data;
+  // });
   return (
     <div className={styles.container}>
       <h1>Discover popular songs</h1>
-      {status === "loading" ? (
-        "Loading..."
-      ) : status === "error" ? (
-        <span>Error: {error}</span>
-      ) : (
         <Carousel responsive={responsive}>
-          {data?.items?.map((track) => (
+          {items?.map((track) => (
             <DiscoverTracks key={track.id} track={track} />
           ))}
         </Carousel>
-      )}
     </div>
   );
 };

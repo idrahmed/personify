@@ -1,4 +1,6 @@
 import { getSession } from "next-auth/client";
+import { getToken } from "next-auth/jwt";
+import axios from "axios";
 import { useState } from "react";
 import Discover from "../components/discover/Discover";
 import Sidebar from "../components/sidebar/Sidebar";
@@ -9,7 +11,7 @@ import TopTracks from "../components/views/TopTracks";
 
 import styles from "../styles/Dashboard.module.css";
 
-const Dashboard = () => {
+const Dashboard = ({items}) => {
   const [selected, setSelected] = useState("top_tracks");
 
   return (
@@ -19,18 +21,18 @@ const Dashboard = () => {
           <Sidebar setSelected={setSelected} selected={selected} />
         </div>
         <div className={styles.body}>
-          <Discover />
-            {selected === "top_tracks" ? (
-              <TopTracks />
-            ) : selected === "top_artists" ? (
-              <TopArtists />
-            ) : selected === "recent" ? (
-              <Recent />
-            ) : selected === "recommended" ? (
-              <Recommended />
-            ) : (
-              ""
-            )}
+          <Discover items={items}/>
+          {selected === "top_tracks" ? (
+            <TopTracks />
+          ) : selected === "top_artists" ? (
+            <TopArtists />
+          ) : selected === "recent" ? (
+            <Recent />
+          ) : selected === "recommended" ? (
+            <Recommended />
+          ) : (
+            ""
+          )}
         </div>
       </div>
     </>
@@ -38,7 +40,7 @@ const Dashboard = () => {
 };
 
 export async function getServerSideProps(context) {
-  const session = await getSession({ req: context.req })
+  const session = await getSession({ req: context.req });
   if (!session) {
     return {
       redirect: {
@@ -47,12 +49,32 @@ export async function getServerSideProps(context) {
       },
     };
   }
-   
+
+  const secret = process.env.NEXTAUTH_SECRET;
+  const token = await getToken({ req: context.req, secret });
+  const {
+    data: { tracks },
+  } = await axios.get(
+    "https://api.spotify.com/v1/recommendations?limit=20&seed_genres=pop",
+    {
+      headers: { Authorization: `Bearer ${token.accessToken}` },
+    }
+  );
+
+  const items = tracks.map((track) => ({
+    id: track.id,
+    title: track.name,
+    uri: track.uri,
+    subtitle: track.artists[0].name,
+    images: track.album.images[1],
+  }));
+
   return {
     props: {
-        session
-    }
-  }
+      session,
+      items
+    },
+  };
 }
 
 export default Dashboard;

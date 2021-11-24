@@ -1,15 +1,22 @@
 import Head from "next/head";
 import Image from "next/image";
+import { useRouter } from 'next/router'
 import styles from "./Sidebar.module.css";
 
 import { signOut, useSession } from "next-auth/client";
 
 const Sidebar = ({ selected, setSelected }) => {
   const [session, loading] = useSession();
+  const router = useRouter()
 
   const onClick = (route) => {
     setSelected(route);
   };
+
+  const logOut = () => {
+    signOut()
+    router.replace('/signin')
+  }
 
   return (
     <>
@@ -63,7 +70,7 @@ const Sidebar = ({ selected, setSelected }) => {
                     <div className={styles.job}>{session.user.email}</div>
                   </div>
                 </div>
-                <i className="bx bx-log-out" id="log_out" onClick={() => signOut()} />
+                <i className="bx bx-log-out" id="log_out" onClick={logOut} />
               </>
             )}
           </div>
