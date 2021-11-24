@@ -13,6 +13,7 @@
   height: 60px;
   display: flex;
   align-items: center;
+  justify-content: center;
 }
 .sidebar .logo_details .logo_name {
   display: flex;
@@ -22,6 +23,7 @@
   font-weight: 600;
 }
 .sidebar .logo_name h4 {
+  height: 30px;
   margin-right: 25px;
 }
 .sidebar i {

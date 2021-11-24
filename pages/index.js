@@ -1,5 +1,4 @@
 import { getSession } from "next-auth/client";
-import { getToken } from "next-auth/jwt";
 import axios from "axios";
 import { useState } from "react";
 import Discover from "../components/discover/Discover";
@@ -50,14 +49,15 @@ export async function getServerSideProps(context) {
     };
   }
 
-  const secret = process.env.NEXTAUTH_SECRET;
-  const token = await getToken({ req: context.req, secret });
+  console.log(session.accessToken)
+
+  const token = session.accessToken
   const {
     data: { tracks },
   } = await axios.get(
     "https://api.spotify.com/v1/recommendations?limit=20&seed_genres=pop",
     {
-      headers: { Authorization: `Bearer ${token.accessToken}` },
+      headers: { Authorization: `Bearer ${token}` },
     }
   );
 
