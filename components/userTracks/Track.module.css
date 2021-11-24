@@ -7,7 +7,7 @@
   justify-content: space-between;
   cursor: pointer;
   list-style: none;
-  color: white
+  color: white;
 }
 
 .container::before {
@@ -37,7 +37,7 @@
   display: flex;
   align-items: center;
   flex: 1;
-  min-width: 200px;
+  min-width: 60%;
 }
 
 .title h4 {
@@ -50,37 +50,41 @@
 
 .artist {
   flex: 1;
-  min-width: 200px;
-
+  width: 30%;
 }
 
 .artist h4 {
+  margin-right: 0.5rem;
   white-space: nowrap;
   overflow: hidden;
   text-overflow: ellipsis;
 }
 
 @media screen and (max-width: 980px) {
-.interactive {
-  display: none;
+  .interactive {
+    display: none;
+  }
+  .title {
+    flex: 2;
+    font-size: 0.8rem;
+  }
+  .images {
+    position: relative;
+    min-height: 50px !important;
+    min-width: 50px !important;
+  }
+  .container {
+    padding: 0.5rem;
+  }
+  .artist {
+    display: flex;
+    justify-content: center;
+    font-size: 0.8rem;
+  }
+  .container::before {
+    display: none;
+  }
 }
-.title {
-  flex: 2;
-  font-size: .9rem;
-}
-.images {
-  position: relative;
-  min-height: 50px !important;
-  min-width: 50px !important;
-}
-.container {
-  padding: 0.5rem 0 0.5rem 2rem;
-}
-.artist {
-  display: flex;
-  justify-content: center;
-  font-size: .9rem;
-}
-}
+
 
 
