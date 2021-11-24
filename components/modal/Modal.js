@@ -4,7 +4,6 @@ import Link from "next/link";
 import styles from "./Modal.module.css";
 
 const Modal = ({ setOpen, data, isLoading }) => {
-  console.log(data);
   return ReactDom.createPortal(
     data && (
       <div className={styles.modalBackground} onClick={() => setOpen(false)}>

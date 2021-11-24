@@ -14,8 +14,6 @@ export default handler().post(async (req, res, next) => {
   }
     try {
       const {data:{id, uri}} = await createPlaylist(userId, name) 
-      console.log(id)
-      console.log(uri)
       await addTracks(id, uris)
       const {data: coverImage} = await getCoverImage(id)
       return res.status(201).json({ message: "Playlist created", id, uri, coverImage: coverImage[1] });

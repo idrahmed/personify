@@ -13,8 +13,8 @@ const Sidebar = ({ selected, setSelected }) => {
     setSelected(route);
   };
 
-  const logOut = () => {
-    signOut()
+  const logOut = async() => {
+    await signOut()
     router.replace('/signin')
   }
 
