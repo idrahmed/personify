@@ -2,22 +2,27 @@ import spotifyInstance from "./axios"
 
 const LIMIT = 50
 
+// get a users top tracks. Takes in a timeRange arg (long_term, medium_term or short_term)
 export const getTopTracks = async (timeRange, limit=LIMIT) => {
     return spotifyInstance.get(`me/top/tracks/?time_range=${timeRange}&limit=${limit}`)  
 }
 
+// get a users top artists. Takes in a timeRange arg (long_term, medium_term or short_term)
 export const getTopArtists = async (timeRange, limit=LIMIT) => {
     return spotifyInstance.get(`me/top/artists/?time_range=${timeRange}&limit=${limit}`) 
 }
 
+// get a users recenetly played tracks
 export const getRecentlyPlayed = async (limit=LIMIT) => {
     return spotifyInstance.get(`me/player/recently-played?limit=${limit}`) 
 }
 
+// gets recommendations for a user. SeedType refer to a resource such as artists or tracks and seedValues are the actual artist or tracks data. 
 export const getRecommended = async (seedType, seedValues, limit=LIMIT) => {
     return spotifyInstance.get(`recommendations?limit=${limit}&${seedType}=${seedValues}`)
 }
 
+// get the latest pop genre songs
 export const getDiscoverPopular = async (limit=LIMIT) => {
     return spotifyInstance.get(`recommendations?limit=${limit}&seed_genres=pop`)
 }

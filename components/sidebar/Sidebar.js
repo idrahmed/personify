@@ -1,22 +1,22 @@
 import Head from "next/head";
 import Image from "next/image";
-import { useRouter } from 'next/router'
+import { useRouter } from "next/router";
 import styles from "./Sidebar.module.css";
 
 import { signOut, useSession } from "next-auth/client";
 
 const Sidebar = ({ selected, setSelected }) => {
   const [session, loading] = useSession();
-  const router = useRouter()
+  const router = useRouter();
 
   const onClick = (route) => {
     setSelected(route);
   };
 
-  const logOut = async() => {
-    await signOut()
-    router.replace('/signin')
-  }
+  const logOut = async () => {
+    await signOut();
+    router.replace("/signin");
+  };
 
   return (
     <>
@@ -35,19 +35,31 @@ const Sidebar = ({ selected, setSelected }) => {
           </div>
         </div>
         <ul className={styles.nav_list}>
-          <li onClick={() => onClick("top_tracks")} className={selected === 'top_tracks' ? styles.selected: ''}>
+          <li
+            onClick={() => onClick("top_tracks")}
+            className={selected === "top_tracks" ? styles.selected : ""}
+          >
             <i className="bx bx-music" />
             <span className={styles.links_name}>Top Tracks</span>
           </li>
-          <li onClick={() => onClick("top_artists")} className={selected === 'top_artists' ? styles.selected: ''}>
+          <li
+            onClick={() => onClick("top_artists")}
+            className={selected === "top_artists" ? styles.selected : ""}
+          >
             <i className="bx bx-podcast" />
             <span className={styles.links_name}>Top Artists</span>
           </li>
-          <li onClick={() => onClick("recent")} className={selected === 'recent' ? styles.selected: ''}>
+          <li
+            onClick={() => onClick("recent")}
+            className={selected === "recent" ? styles.selected : ""}
+          >
             <i className="bx bx-time-five" />
             <span className={styles.links_name}>Recent</span>
           </li>
-          <li onClick={() => onClick("recommended")} className={selected === 'recommended' ? styles.selected: ''}>
+          <li
+            onClick={() => onClick("recommended")}
+            className={selected === "recommended" ? styles.selected : ""}
+          >
             <i className="bx bx-disc" />
             <span className={styles.links_name}>Recommended</span>
           </li>

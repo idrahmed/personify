@@ -2,6 +2,8 @@ import styles from "./Track.module.css";
 import Image from "next/image";
 import Link from "next/link";
 
+// track element for every track,artist,recent,recommendation
+
 const Track = ({ track }) => {
   return (
     <Link href={track.uri}>
@@ -10,7 +12,7 @@ const Track = ({ track }) => {
           <div className={styles.images}>
             <Image
               unoptimized
-              src={track.images.url}
+              src={track.images?.url || " "}
               alt=""
               layout="fill"
               objectFit="cover"

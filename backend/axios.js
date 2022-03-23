@@ -1,12 +1,14 @@
 import axios from "axios";
 import { getToken } from "next-auth/jwt";
 
+// spotify api url
 const spotifyInstance = axios.create({
   baseURL: "https://api.spotify.com/v1/",
 });
 
 const secret = process.env.NEXTAUTH_SECRET;
 
+// middleware that will get the spotify auth token and place it as a header when we make requests. 
 export const getAccessToken = async (req, res, next) => {
   const token = await getToken({ req, secret });
   if (token) {

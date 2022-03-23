@@ -1,6 +1,8 @@
 import handler from "../../../backend/handler";
 import { getRecentlyPlayed } from "../../../backend/spotifyAPI";
 
+// get recently played tracks for a user. 
+
 export default handler().get(async (req, res, next) => {
   try {
     const {data: {items}} = await getRecentlyPlayed();

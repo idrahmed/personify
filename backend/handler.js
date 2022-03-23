@@ -1,6 +1,7 @@
 import nc from "next-connect";
 import { getAccessToken } from "./axios";
 
+// handler that uses the getAccessToken middleware and has an onError fn that handles errors we throw. 
 export default function handler() {
   return nc({
     onError(error, req, res, next) {

@@ -1,6 +1,8 @@
 import handler from "../../../backend/handler";
 import { getDiscoverPopular } from "../../../backend/spotifyAPI";
 
+// get back 20 latest popular songs of the pop genre. 
+
 export default handler().get(async (req, res, next) => {
   try {
     const {data: {tracks}} = await getDiscoverPopular(20);

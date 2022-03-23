@@ -35,7 +35,7 @@ async function refreshAccessToken(token) {
       ...token,
       accessToken: refreshedTokens.access_token,
       accessTokenExpires: Date.now() + refreshedTokens.expires_in * 1000,
-      refreshToken: refreshedTokens.refresh_token ?? token.refreshToken, // Fall back to old refresh token
+      refreshToken: refreshedTokens.refresh_token ?? token.refreshToken, // Fall back to old refresh token if we are not provided with a new one
     };
   } catch (error) {
     return {
@@ -55,6 +55,8 @@ export default NextAuth({
     }),
   ],
   callbacks: {
+    // This callback is called whenever a JSON Web Token is created (i.e. at sign in) or updated (i.e whenever a session is accessed in the client).
+
     async jwt(token, account, user) {
       if (account && user) {
         token = {
@@ -74,6 +76,7 @@ export default NextAuth({
         return token;
       }
     },
+
     async session(session, token) {
       if (token) {
         session.accessToken = token.accessToken;

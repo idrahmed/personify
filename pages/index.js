@@ -12,6 +12,7 @@ import TopTracks from "../components/views/TopTracks";
 import styles from "../styles/Dashboard.module.css";
 
 const Dashboard = ({ items }) => {
+  // state to select which option a user wants to get data for.
   const [selected, setSelected] = useState("top_tracks");
 
   return (
@@ -44,6 +45,7 @@ const Dashboard = ({ items }) => {
 };
 
 export async function getServerSideProps(context) {
+  // first get a user's session.
   const session = await getSession({ req: context.req });
   if (!session) {
     return {
@@ -54,6 +56,7 @@ export async function getServerSideProps(context) {
     };
   }
 
+  // next make the request to get 20 tracks from the pop genre.
   const token = session.accessToken;
   const {
     data: { tracks },
@@ -64,6 +67,7 @@ export async function getServerSideProps(context) {
     }
   );
 
+  // clean up the items we received
   const items = tracks.map((track) => ({
     id: track.id,
     title: track.name,
@@ -72,9 +76,9 @@ export async function getServerSideProps(context) {
     images: track.album.images[1],
   }));
 
+  // return items as props
   return {
     props: {
-      session,
       items,
     },
   };
